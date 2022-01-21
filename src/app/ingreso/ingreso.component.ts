@@ -1,15 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { Ingreso } from './ingreso.model';
+import { IngresoService } from './ingreso.service';
 
 @Component({
-  selector: 'app-ingreso',
-  templateUrl: './ingreso.component.html',
-  styleUrls: ['./ingreso.component.css']
+	selector: 'app-ingreso',
+	templateUrl: './ingreso.component.html',
+	styleUrls: ['./ingreso.component.css']
 })
 export class IngresoComponent implements OnInit {
 
-  constructor() { }
+	ingresos: Ingreso[] = [];
 
-  ngOnInit(): void {
-  }
+	constructor(private ingresoService: IngresoService) { }
+
+	ngOnInit(): void {
+		this.ingresos = this.ingresoService.ingresos;
+	}
+
+	deleteRegister(ingreso: Ingreso): void {
+		this.ingresoService.delete(ingreso);
+	}
 
 }
